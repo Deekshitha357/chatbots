@@ -1,12 +1,28 @@
+import os
 import nltk
-nltk.download('punkt')
+from nltk.data import find
+from flask import Flask, render_template, request, jsonify
+
+app = Flask(__name__)
+app.static_folder = 'static'
+
+# Function to download NLTK resources if they are not available
+def download_nltk_resources():
+    try:
+        find('tokenizers/punkt')
+    except:
+        nltk.download('punkt')
+
+# Call this function when the app starts
+download_nltk_resources()
+
+# Load other components
 from nltk.stem import WordNetLemmatizer
 lemmatizer = WordNetLemmatizer()
 import pickle
 import numpy as np
 from keras.models import load_model
 import json
-from flask import Flask, render_template, request, jsonify
 
 model = load_model('model.h5')
 intents = json.loads(open('data.json').read())
@@ -58,9 +74,6 @@ def chatbot_response(msg):
     except Exception as e:
         print(f"Error in chatbot_response: {e}")
         return "Sorry, there was an error."
-
-app = Flask(__name__)
-app.static_folder = 'static'
 
 @app.route("/")
 def home():
