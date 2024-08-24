@@ -1,0 +1,436 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": ["Hi there", "How are you", "Is anyone there?", "Hey", "Hola", "Hello", "Good day"],
+      "responses": ["Hello! I'm here to assist you. What symptoms are you currently experiencing? I can provide information on medications and precautions."],
+      "context": [""]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": ["Bye", "See you later", "Goodbye", "Nice chatting to you, bye", "Till next time"],
+      "responses": ["See you later! If you need any help, feel free to reach out again. Have a great day!"],
+      "context": [""]
+    },
+    {
+      "tag": "thanks",
+      "patterns": ["Thanks", "Thank you", "That's helpful", "Awesome, thanks", "Thanks for helping me"],
+      "responses": ["You're welcome! I'm glad I could help. If you have any more questions, just let me know."],
+      "context": [""]
+    },
+    {
+      "tag": "noanswer",
+      "patterns": [],
+      "responses": ["Sorry, I didn't understand that. Could you please provide more details or ask another question?"],
+      "context": [""]
+    },
+    {
+      "tag": "options",
+      "patterns": ["How you could help me?", "What you can do?", "What help you provide?", "How you can be helpful?", "What support is offered"],
+      "responses": ["I can assist with information on various symptoms, provide medication advice, offer precautions, and help with finding hospitals or pharmacies."],
+      "context": [""]
+    },
+    {
+      "tag": "multiple_symptoms",
+      "patterns": ["I have multiple symptoms", "I'm experiencing several symptoms", "I have a few health issues", "Multiple things are bothering me"],
+      "responses": [
+        "Please list the symptoms you are experiencing, and I will help identify the potential diseases and provide appropriate medications and precautions."
+      ],
+      "context": ["identify_multiple_symptoms"]
+    },
+    {
+      "tag": "identify_multiple_symptoms",
+      "patterns": [],
+      "responses": ["Analyzing your symptoms... Based on your description, it could be related to the following conditions: {potential_diseases}.<br> Here are some general medications: {medications}.<br> It's recommended to consult a healthcare professional for a more accurate diagnosis."],
+      "context": [""]
+    },
+    {
+      "tag": "adverse_drug",
+      "patterns": ["How to check Adverse drug reaction?", "Open adverse drugs module", "Give me a list of drugs causing adverse behavior", "List all drugs suitable for patient with adverse reaction", "Which drugs don't have adverse reaction?"],
+      "responses": ["Navigating to the Adverse Drug Reaction module for more information."],
+      "context": [""]
+    },
+    {
+      "tag": "blood_pressure",
+      "patterns": ["Open blood pressure module", "Task related to blood pressure", "Blood pressure data entry", "I want to log blood pressure results", "Blood pressure data management"],
+      "responses": ["Navigating to the Blood Pressure module."],
+      "context": [""]
+    },
+   {
+      "tag": "fever",
+      "patterns": ["I have a fever", "fever", "I'm running a fever", "My temperature is high", "I feel hot"],
+      "responses": [
+        "- For fever: Take over-the-counter fever reducers like acetaminophen or ibuprofen. Rest and stay hydrated.<br> - Precautions: Avoid overheating, drink fluids, and monitor your temperature. Wear lightweight clothing.<br> - Potential diseases: Fever can be a symptom of infections such as the flu, common cold, or more serious conditions like pneumonia. Consult a healthcare provider if the fever persists or is very high."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "cough",
+      "patterns": ["I have a cough", "cough", "I'm coughing", "My throat is scratchy", "I can't stop coughing"],
+      "responses": [
+        "- For cough: Use cough suppressants or expectorants. Drink warm liquids like honey and lemon tea.<br> - Precautions: Avoid irritants like smoke and dry air. Rest and stay hydrated.<br> - Potential diseases: Coughing can be due to colds, bronchitis, or more serious conditions like asthma. Seek medical advice if the cough is persistent or severe."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "cold",
+      "patterns": ["I have a cold", "cold", "I'm feeling cold", "I have a runny nose", "I'm sneezing a lot"],
+      "responses": [
+        "- For a cold: Rest, drink fluids, and use over-the-counter decongestants or saline nasal sprays.<br> - Precautions: Wash your hands frequently, avoid close contact with others, and get plenty of rest.<br> - Potential diseases: A cold is usually caused by viruses such as rhinoviruses. Consult a healthcare provider if symptoms are severe or persist."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "headache",
+      "patterns": ["I have a headache", "headache", "I'm experiencing a headache", "My head hurts", "I'm having pain in my head"],
+      "responses": [
+        "- For a headache: Use over-the-counter pain relievers like ibuprofen or acetaminophen. Rest in a quiet, dark room.<br> - Precautions: Avoid triggers such as bright lights or loud noises. Stay hydrated and maintain a regular sleep schedule.<br> - Potential diseases: Headaches can be caused by tension, migraines, or sinus infections. Seek medical advice if headaches are frequent or severe."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "sore_throat",
+      "patterns": ["I have a sore throat", "sore throat", "my throat hurts", "I'm having trouble swallowing", "My throat is sore"],
+      "responses": [
+        "- For a sore throat: Gargle with warm salt water, use throat lozenges, and stay hydrated. Avoid irritants such as smoke.<br> - Precautions: Rest your voice and avoid cold drinks. Use a humidifier to moisten the air.<br> - Potential diseases: A sore throat can be caused by infections like strep throat or the common cold. Consult a healthcare provider for a proper diagnosis."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "vomiting",
+      "patterns": ["I feel like vomiting", "vomiting", "I'm vomiting", "I can't stop vomiting", "I'm feeling nauseous and vomiting"],
+      "responses": [
+        "- For vomiting: Stay hydrated with small sips of water or oral rehydration solutions. Rest and avoid solid foods until vomiting stops.<br> - Precautions: Avoid strong odors and eat bland, easy-to-digest foods. Consult a healthcare provider if vomiting persists.<br> - Potential diseases: Vomiting can be caused by gastroenteritis, food poisoning, or motion sickness. Seek medical attention if symptoms are severe."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "back_pain",
+      "patterns": ["I have back pain", "back pain", "My back hurts", "I'm experiencing back pain", "I have a sore back"],
+      "responses": [
+        "- For back pain: Use pain relievers, apply heat or cold packs, and rest. Gentle stretching exercises may help.<br> - Precautions: Maintain good posture and avoid heavy lifting. Use supportive chairs and mattresses.<br> - Potential diseases: Back pain can be due to muscle strain, herniated discs, or sciatica. Consult a healthcare professional for an accurate diagnosis."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "abdominal_pain",
+      "patterns": ["I have abdominal pain", "stomach ache", "My stomach hurts", "I'm experiencing abdominal pain", "I have a stomach ache"],
+      "responses": [
+        "- For abdominal pain: Rest and use over-the-counter antacids or pain relief medications. Drink clear fluids.<br> - Precautions: Avoid spicy, fatty foods, and carbonated drinks. Monitor your symptoms.<br> - Potential diseases: Abdominal pain can be caused by indigestion, gastritis, or appendicitis. Seek medical advice if pain persists or is severe."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "shortness_of_breath",
+      "patterns": ["I'm short of breath", "shortness of breath", "I can't breathe", "I'm having trouble breathing", "Breathless"],
+      "responses": [
+        "- For shortness of breath: Sit upright, relax, and breathe slowly. Use inhalers if prescribed.<br> - Precautions: Avoid exposure to allergens and pollutants. Stay calm and monitor your symptoms.<br> - Potential diseases: Shortness of breath can be due to asthma, respiratory infections, or anxiety. Seek medical advice if the condition is severe or persistent."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "chest_pain",
+      "patterns": ["I have chest pain", "chest pain", "My chest hurts", "I'm experiencing chest pain", "Chest discomfort"],
+      "responses": [
+        "- For chest pain: Rest and take deep breaths. If prescribed, use medications like nitroglycerin.<br> - Precautions: Avoid exertion and monitor your symptoms closely. Seek immediate medical attention if the pain is severe or associated with other symptoms.<br> - Potential diseases: Chest pain can be due to heart conditions, acid reflux, or anxiety. Consult a healthcare professional for a thorough evaluation."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "allergies",
+      "patterns": ["I have allergies", "allergy", "I'm allergic", "Allergic reaction", "I have hay fever"],
+      "responses": [
+        "- For allergies: Use antihistamines and avoid exposure to allergens. Keep windows closed during high pollen seasons.<br> - Precautions: Carry emergency medication if you have severe allergies. Use air purifiers and avoid pets if allergic.<br> - Potential diseases: Allergies can cause symptoms like sneezing, itching, and runny nose. Consult an allergist for specific allergy testing and management."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "rash",
+      "patterns": ["I have a rash", "rash", "My skin is red", "I'm experiencing a rash", "Skin rash"],
+      "responses": [
+        "- For a rash: Use over-the-counter creams or antihistamines to relieve itching. Keep the area clean and avoid scratching.<br> - Precautions: Avoid using new skin products or detergents that might cause irritation. Monitor the rash for changes.<br> - Potential diseases: Rashes can be caused by allergic reactions, infections, or skin conditions like eczema. Seek medical advice if the rash persists or spreads."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "ear_pain",
+      "patterns": ["I have ear pain", "earache", "My ear hurts", "I'm experiencing ear pain", "Ear discomfort"],
+      "responses": [
+        "- For ear pain: Use warm compresses and over-the-counter pain relievers. Avoid inserting objects into the ear.<br> - Precautions: Keep your ears dry and clean. Avoid exposure to loud noises.<br> - Potential diseases: Ear pain can be caused by infections, earwax buildup, or TMJ disorders. Consult a healthcare professional for an accurate diagnosis."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "eye_pain",
+      "patterns": ["I have eye pain", "my eyes hurt", "I'm experiencing eye pain", "Eye discomfort", "Pain in my eyes"],
+      "responses": [
+        "- For eye pain: Rest your eyes and use lubricating eye drops. Avoid bright screens and strong lights.<br> - Precautions: Wear sunglasses when outdoors and take regular breaks from screens.<br> - Potential diseases: Eye pain can be due to conditions like conjunctivitis, dry eyes, or eye strain. Seek medical advice if pain persists or vision changes occur."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "joint_pain",
+      "patterns": ["I have joint pain", "joint pain", "My joints hurt", "I'm experiencing joint pain", "Pain in my joints"],
+      "responses": [
+        "- For joint pain: Use pain relievers and apply ice or heat packs. Rest and avoid activities that worsen the pain.<br> - Precautions: Maintain a healthy weight and avoid excessive strain on your joints. Regular exercise and stretching can help.<br> - Potential diseases: Joint pain can be caused by arthritis, injuries, or overuse. Consult a healthcare professional for a proper diagnosis."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "muscle_pain",
+      "patterns": ["I have muscle pain", "muscle ache", "My muscles hurt", "I'm experiencing muscle pain", "Pain in my muscles"],
+      "responses": [
+        "- For muscle pain: Use over-the-counter pain relievers and apply heat or cold packs. Rest and avoid strenuous activities.<br> - Precautions: Stretch before and after exercise, and stay hydrated. Avoid excessive lifting.<br> - Potential diseases: Muscle pain can be due to strain, overuse, or underlying conditions like fibromyalgia. Seek medical advice if pain persists."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "dizziness",
+      "patterns": ["I feel dizzy", "dizziness", "I'm experiencing dizziness", "I feel lightheaded", "I feel unsteady"],
+      "responses": [
+        "- For dizziness: Sit or lie down until the feeling passes. Drink fluids and avoid sudden movements.<br> - Precautions: Avoid driving or operating machinery if you feel dizzy. Monitor for other symptoms.<br> - Potential diseases: Dizziness can be caused by dehydration, inner ear issues, or low blood pressure. Consult a healthcare provider if dizziness is frequent or severe."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "nausea",
+      "patterns": ["I feel nauseous", "nausea", "I'm feeling sick", "I have an upset stomach", "I feel queasy"],
+      "responses": [
+        "- For nausea: Sip on clear fluids and eat bland foods. Rest and avoid strong odors.<br> - Precautions: Eat small, frequent meals and avoid greasy or spicy foods.<br> - Potential diseases: Nausea can be caused by digestive issues, motion sickness, or infections. Seek medical advice if nausea persists."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "fatigue",
+      "patterns": ["I'm feeling fatigued", "fatigue", "I'm tired", "I have low energy", "I feel exhausted"],
+      "responses": [
+        "- For fatigue: Get adequate rest, eat a balanced diet, and exercise regularly.<br> - Precautions: Avoid excessive caffeine and ensure you are getting quality sleep.<br> - Potential diseases: Fatigue can be a symptom of conditions such as anemia, chronic fatigue syndrome, or thyroid disorders. Consult a healthcare professional if fatigue is persistent."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "weight_loss",
+      "patterns": ["I have lost weight", "weight loss", "I'm losing weight", "Unexplained weight loss", "I’ve dropped pounds"],
+      "responses": [
+        "- For weight loss: Maintain a healthy diet and consult a healthcare provider to ensure weight loss is not due to an underlying condition.<br> - Precautions: Monitor your weight regularly and seek medical advice if weight loss is significant or unintentional.<br> - Potential diseases: Weight loss can be caused by conditions like diabetes, hyperthyroidism, or cancer. Consult a healthcare professional for further evaluation."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "appetite_loss",
+      "patterns": ["I have loss of appetite", "loss of appetite", "I’m not hungry", "I’ve lost my appetite", "I’m not eating well"],
+      "responses": [
+        "- For appetite loss: Eat small, frequent meals and consider nutritional supplements if needed. Consult a healthcare provider for advice.<br> - Precautions: Monitor your weight and ensure you are getting adequate nutrients.<br> - Potential diseases: Loss of appetite can be due to stress, infections, or more serious conditions like depression or cancer. Seek medical advice if the loss of appetite persists."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "diarrhea",
+      "patterns": ["I have diarrhea", "diarrhea", "I'm experiencing diarrhea", "My stools are loose", "I have frequent bowel movements"],
+      "responses": [
+        "- For diarrhea: Stay hydrated with oral rehydration solutions. Eat bland foods like bananas, rice, and toast.<br> - Precautions: Avoid dairy products and caffeine. Seek medical advice if diarrhea persists or is severe.<br> - Potential diseases: Diarrhea can be caused by infections, food poisoning, or digestive disorders. Consult a healthcare provider if symptoms are severe or persistent."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "constipation",
+      "patterns": ["I am constipated", "constipation", "I'm having trouble passing stool", "I can't poop", "I'm not regular"],
+      "responses": [
+        "- For constipation: Increase fiber intake through fruits, vegetables, and whole grains. Drink plenty of water and exercise regularly.<br> - Precautions: Avoid excessive caffeine and processed foods. Consider using mild laxatives if necessary.<br> - Potential diseases: Constipation can be caused by diet, medication, or digestive disorders. Consult a healthcare professional if constipation persists or is severe."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "swelling",
+      "patterns": ["I have swelling", "swelling", "I'm experiencing swelling", "Swollen area"],
+      "responses": [
+        "- For swelling: Elevate the affected area and use cold compresses. Avoid prolonged standing or sitting.<br> - Precautions: Reduce salt intake and stay hydrated. Monitor for any changes in the swollen area.<br> - Potential diseases: Swelling can be caused by injuries, infections, or circulatory issues. Consult a healthcare professional for a proper diagnosis."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "bruising",
+      "patterns": ["I have bruising", "bruise", "I'm bruised", "My skin is bruised", "I'm experiencing bruising"],
+      "responses": [
+        "- For bruising: Apply cold compresses to reduce swelling and pain. Rest and elevate the bruised area.<br> - Precautions: Avoid further trauma to the area and monitor for changes. Use protective gear if necessary.<br> - Potential diseases: Bruising can be due to injuries, blood disorders, or medication side effects. Consult a healthcare professional if bruising is frequent or unexplained."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "chills",
+      "patterns": ["I have chills", "chills", "I'm experiencing chills", "I feel cold and shivery", "I have a shiver"],
+      "responses": [
+        "- For chills: Warm yourself with blankets and drink hot fluids. Rest and monitor your symptoms.<br> - Precautions: Avoid exposure to cold environments and keep warm.<br> - Potential diseases: Chills can be caused by infections like flu or malaria, or by fevers. Seek medical advice if chills are severe or persistent."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "sweating",
+      "patterns": ["I am sweating a lot", "sweating", "I'm perspiring", "I have excessive sweating", "I'm experiencing heavy sweating"],
+      "responses": [
+        "- For sweating: Wear lightweight, breathable clothing and stay hydrated. Use antiperspirants if necessary.<br> - Precautions: Avoid triggers like spicy foods and hot environments.<br> - Potential diseases: Excessive sweating can be caused by conditions such as hyperhidrosis or infections. Consult a healthcare professional if sweating is excessive or unexplained."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "numbness",
+      "patterns": ["I have numbness", "numbness", "I'm experiencing numbness", "My limbs feel numb", "I'm feeling tingling and numbness"],
+      "responses": [
+        "- For numbness: Rest and avoid positions that may compress nerves. Consult a healthcare provider if numbness persists.<br> - Precautions: Avoid repetitive movements that can cause nerve compression.<br> - Potential diseases: Numbness can be caused by nerve issues, poor circulation, or conditions like diabetes. Seek medical advice if numbness is persistent or severe."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "tingling",
+      "patterns": ["I feel tingling", "tingling", "I'm experiencing tingling", "I have a tingling sensation", "My skin feels prickly"],
+      "responses": [
+        "- For tingling: Rest and avoid positions that might compress nerves. Monitor for other symptoms.<br> - Precautions: Avoid repetitive movements and maintain good posture.<br> - Potential diseases: Tingling can be caused by nerve issues, poor circulation, or conditions like carpal tunnel syndrome. Seek medical advice if tingling is persistent or severe."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "confusion",
+      "patterns": ["I feel confused", "confusion", "I'm experiencing confusion", "I'm having trouble thinking", "I feel disoriented"],
+      "responses": [
+        "- For confusion: Ensure adequate rest and hydration. Avoid alcohol and medications that can impair cognitive function.<br> - Precautions: Monitor for other symptoms and consult a healthcare provider if confusion persists.<br> - Potential diseases: Confusion can be caused by infections, dehydration, or neurological conditions. Seek medical attention if confusion is severe or persistent."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "difficulty_speaking",
+      "patterns": ["I'm having trouble speaking", "difficulty speaking", "I can't speak clearly", "I'm slurring my words", "I'm having trouble with speech"],
+      "responses": [
+        "- For difficulty speaking: Rest and consult a healthcare provider for a thorough evaluation.<br> - Precautions: Avoid situations that might exacerbate speech difficulties.<br> - Potential diseases: Difficulty speaking can be due to neurological conditions, stroke, or infections. Seek immediate medical attention if speech problems are sudden or severe."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "seizures",
+      "patterns": ["I have seizures", "seizures", "I'm experiencing seizures", "I'm having convulsions", "I had a seizure"],
+      "responses": [
+        "- For seizures: Ensure safety during a seizure and consult a healthcare provider for a proper diagnosis.<br> - Precautions: Avoid triggers if known and follow medical advice for seizure management.<br> - Potential diseases: Seizures can be caused by epilepsy, brain injuries, or infections. Seek medical attention for proper diagnosis and treatment."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "memory_loss",
+      "patterns": ["I have memory loss", "memory loss", "I'm forgetting things", "I can't remember", "I have trouble with memory"],
+      "responses": [
+        "- For memory loss: Engage in mental exercises and maintain a healthy lifestyle. Consult a healthcare provider for further evaluation.<br> - Precautions: Avoid stress and use memory aids if necessary.<br> - Potential diseases: Memory loss can be due to conditions such as dementia or brain injuries. Seek medical advice for a proper diagnosis."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "skin_changes",
+      "patterns": ["I have skin changes", "skin changes", "My skin looks different", "I'm experiencing skin changes", "I have changes in my skin"],
+      "responses": [
+        "- For skin changes: Monitor for any unusual changes and consult a healthcare provider if needed.<br> - Precautions: Avoid exposure to irritants and use appropriate skin care products.<br> - Potential diseases: Skin changes can be due to conditions such as dermatitis or skin cancer. Seek medical advice for an accurate diagnosis."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "thirst",
+      "patterns": ["I am very thirsty", "thirsty", "I feel dehydrated", "I can't quench my thirst", "I'm drinking a lot of water"],
+      "responses": [
+        "- For thirst: Drink plenty of fluids and maintain a balanced diet. Monitor your hydration levels.<br> - Precautions: Avoid excessive intake of sugary or caffeinated drinks.<br> - Potential diseases: Excessive thirst can be a symptom of diabetes or dehydration. Consult a healthcare provider if thirst is persistent or severe."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "urination_changes",
+      "patterns": ["I have changes in urination", "urination changes", "I'm urinating frequently", "I have pain while urinating", "My urination is different"],
+      "responses": [
+        "- For changes in urination: Monitor your symptoms and consult a healthcare provider if necessary.<br> - Precautions: Drink adequate fluids and avoid irritants like caffeine.<br> - Potential diseases: Changes in urination can be due to urinary tract infections, diabetes, or kidney issues. Seek medical advice for a thorough evaluation."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "difficulty_swallowing",
+      "patterns": ["I have difficulty swallowing", "difficulty swallowing", "I'm having trouble swallowing", "Swallowing is painful", "I'm choking on food"],
+      "responses": [
+        "- For difficulty swallowing: Eat soft foods and take small sips of liquid. Consult a healthcare provider if swallowing problems persist.<br> - Precautions: Avoid eating large bites and stay upright while eating.<br> - Potential diseases: Difficulty swallowing can be caused by conditions like esophageal disorders or throat infections. Seek medical advice for a proper diagnosis."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "severe_pain",
+      "patterns": ["I have severe pain", "severe pain", "I'm experiencing intense pain", "I have excruciating pain", "I'm in agony"],
+      "responses": [
+        "- For severe pain: Seek immediate medical attention and use prescribed pain relief methods.<br> - Precautions: Avoid aggravating activities and follow medical advice for pain management.<br> - Potential diseases: Severe pain can be due to injuries, chronic conditions, or infections. Consult a healthcare provider for a thorough evaluation."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "painful_micturition",
+      "patterns": ["I have painful micturition", "painful urination", "I'm experiencing pain while urinating", "Urination is painful", "I have discomfort while urinating"],
+      "responses": [
+        "- For painful micturition: Drink plenty of fluids and avoid irritants like caffeine. Consult a healthcare provider if pain persists.<br> - Precautions: Maintain good personal hygiene and avoid holding urine for extended periods.<br> - Potential diseases: Painful urination can be due to urinary tract infections or bladder issues. Seek medical advice for proper diagnosis and treatment."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "hemorrhage",
+      "patterns": ["I have hemorrhage", "hemorrhage", "I'm bleeding heavily", "I have severe bleeding", "I'm experiencing a lot of blood loss"],
+      "responses": [
+        "- For hemorrhage: Seek immediate medical attention. Apply pressure to the wound and elevate the affected area.<br> - Precautions: Avoid situations that could cause further injury and follow medical advice for bleeding control.<br> - Potential diseases: Hemorrhage can be caused by injuries, bleeding disorders, or medical conditions. Consult a healthcare provider for an accurate diagnosis and treatment."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "swollen_lymph_nodes",
+      "patterns": ["I have swollen lymph nodes", "swollen lymph nodes", "My lymph nodes are enlarged", "I'm experiencing swollen lymph nodes", "I have lumps in my neck"],
+      "responses": [
+        "- For swollen lymph nodes: Monitor for other symptoms and consult a healthcare provider if swelling persists.<br> - Precautions: Avoid self-diagnosing and seek medical advice for a proper evaluation.<br> - Potential diseases: Swollen lymph nodes can be due to infections, immune disorders, or malignancies. Seek medical advice for a thorough diagnosis."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "hives",
+      "patterns": ["I have hives", "hives", "I'm experiencing hives", "My skin is breaking out in hives", "I'm itchy with hives"],
+      "responses": [
+        "- For hives: Use antihistamines and avoid known allergens. Apply soothing lotions to the affected area.<br> - Precautions: Monitor for new symptoms and avoid triggers.<br> - Potential diseases: Hives can be caused by allergic reactions or other conditions. Consult a healthcare provider if hives persist or worsen."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "feeling_faint",
+      "patterns": ["I feel faint", "fainting", "I'm experiencing faintness", "I feel like I'm going to faint", "I feel lightheaded"],
+      "responses": [
+        "- For feeling faint: Sit or lie down and avoid sudden movements. Drink fluids and rest.<br> - Precautions: Avoid standing up quickly and monitor for other symptoms.<br> - Potential diseases: Feeling faint can be due to dehydration, low blood pressure, or other conditions. Seek medical advice if faintness is frequent or severe."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "ringing_ears",
+      "patterns": ["I have ringing in my ears", "ringing ears", "I'm hearing ringing sounds", "My ears are ringing", "I'm experiencing tinnitus"],
+      "responses": [
+        "- For ringing in ears: Avoid exposure to loud noises and consult a healthcare provider for an evaluation.<br> - Precautions: Use ear protection if exposed to loud environments.<br> - Potential diseases: Ringing in the ears can be caused by ear infections, hearing loss, or other conditions. Seek medical advice for proper diagnosis and management."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "pale_skin",
+      "patterns": ["I have pale skin", "pale skin", "I'm experiencing pale skin", "My skin is looking pale", "I have a pale complexion"],
+      "responses": [
+        "- For pale skin: Monitor your overall health and consult a healthcare provider if you notice other symptoms.<br> - Precautions: Ensure you are getting adequate nutrition and hydration.<br> - Potential diseases: Pale skin can be due to anemia, shock, or other medical conditions. Seek medical advice for an accurate diagnosis."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "sudden_weight_gain",
+      "patterns": ["I have sudden weight gain", "sudden weight gain", "I'm gaining weight quickly", "I've put on weight rapidly", "I have unexplained weight gain"],
+      "responses": [
+        "- For sudden weight gain: Monitor your diet and consult a healthcare provider to determine the cause.<br> - Precautions: Avoid excessive salt and sugar intake. Track your weight regularly.<br> - Potential diseases: Sudden weight gain can be due to hormonal changes, fluid retention, or other conditions. Seek medical advice for further evaluation."
+      ],
+      "context": [""]
+    },
+    {
+      "tag": "dry_skin",
+      "patterns": ["I have dry skin", "dry skin", "My skin is dry", "I'm experiencing dry skin", "I have flaky skin"],
+      "responses": [
+        "- For dry skin: Use moisturizing lotions and stay hydrated. Avoid hot showers and harsh soaps.<br> - Precautions: Apply moisturizer regularly and use gentle skin care products.<br> - Potential diseases: Dry skin can be caused by environmental factors or skin conditions like eczema. Consult a healthcare provider if dryness persists."
+      ],
+      "context": [""]
+    }
+  ]
+}
