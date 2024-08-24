@@ -21,13 +21,11 @@
         <main class="msger-chat">
             <div class="msg left-msg">
                 <div class="msg-img" style="background-image: url('{{ url_for('static', filename='images/bot-icon.png') }}')"></div>
-
                 <div class="msg-bubble">
                     <div class="msg-info">
                         <div class="msg-info-name">Chatbot</div>
                         <div class="msg-info-time">12:45</div>
                     </div>
-
                     <div class="msg-text">
                         Hi, welcome to ChatBot! Go ahead and send me a message.
                     </div>
@@ -47,9 +45,8 @@
         const msgerInput = get(".msger-input");
         const msgerChat = get(".msger-chat");
 
-        // Use Flask url_for to serve local images
-        const BOT_IMG = "{{ url_for('static', filename='images/bot-icon.png') }}";  // Replace with the URL to your robot icon
-        const PERSON_IMG = "{{ url_for('static', filename='images/user-icon.png') }}";  // Replace with the URL to your user icon
+        const BOT_IMG = "{{ url_for('static', filename='images/bot-icon.png') }}";
+        const PERSON_IMG = "{{ url_for('static', filename='images/user-icon.png') }}";
         const BOT_NAME = "ChatBot";
         const PERSON_NAME = "You";
 
@@ -84,13 +81,8 @@
 
         function botResponse(rawText) {
             $.getJSON("/get", { msg: rawText }, function (data) {
-                // Expecting a JSON response
-                const msgText = data;
-                if (typeof msgText === 'string') {
-                    appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
-                } else {
-                    appendMessage(BOT_NAME, BOT_IMG, "left", "Sorry, there was an error.");
-                }
+                const msgText = data.response; // Access the response key from JSON
+                appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
             }).fail(function () {
                 appendMessage(BOT_NAME, BOT_IMG, "left", "Sorry, there was an error.");
             });

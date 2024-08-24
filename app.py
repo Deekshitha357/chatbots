@@ -1,14 +1,14 @@
 import nltk
-nltk.download('punkt')
+nltk.download('popular')
 from nltk.stem import WordNetLemmatizer
 lemmatizer = WordNetLemmatizer()
 import pickle
 import numpy as np
-from keras.models import load_model
-import json
-from flask import Flask, render_template, request, jsonify
 
+from keras.models import load_model
 model = load_model('model.h5')
+import json
+import random
 intents = json.loads(open('data.json').read())
 words = pickle.load(open('texts.pkl', 'rb'))
 classes = pickle.load(open('labels.pkl', 'rb'))
@@ -51,13 +51,11 @@ def getResponse(ints, intents_json):
     return result
 
 def chatbot_response(msg):
-    try:
-        ints = predict_class(msg, model)
-        res = getResponse(ints, intents)
-        return res
-    except Exception as e:
-        print(f"Error in chatbot_response: {e}")
-        return "Sorry, there was an error."
+    ints = predict_class(msg, model)
+    res = getResponse(ints, intents)
+    return res
+
+from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 app.static_folder = 'static'
@@ -68,15 +66,9 @@ def home():
 
 @app.route("/get")
 def get_bot_response():
-    try:
-        userText = request.args.get('msg')
-        if not userText:
-            raise ValueError("No message provided.")
-        response = chatbot_response(userText)
-        return jsonify(response)
-    except Exception as e:
-        print(f"Error in get_bot_response: {e}")
-        return jsonify("Sorry, there was an error.")
+    userText = request.args.get('msg')
+    response = chatbot_response(userText)
+    return jsonify(response)  # Return as JSON if needed
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
