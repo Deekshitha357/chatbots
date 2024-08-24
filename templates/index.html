@@ -83,9 +83,12 @@
         }
 
         function botResponse(rawText) {
-            $.get("/get", { msg: rawText }).done(function (data) {
-                const msgText = data;
+            $.getJSON("/get", { msg: rawText }, function (data) {
+                // Expecting a JSON response with a "response" key
+                const msgText = data.response || "Sorry, I didn't get that.";
                 appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
+            }).fail(function () {
+                appendMessage(BOT_NAME, BOT_IMG, "left", "Sorry, there was an error.");
             });
         }
 
