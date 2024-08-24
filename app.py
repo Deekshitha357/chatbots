@@ -1,4 +1,3 @@
-import logging
 import nltk
 from nltk.stem import WordNetLemmatizer
 import pickle
@@ -7,11 +6,8 @@ from keras.models import load_model
 import json
 from flask import Flask, render_template, request, jsonify
 
-# Configure logging
-logging.basicConfig(level=logging.DEBUG)
-
-# NLTK setup
-nltk.download('popular')
+# Initialize nltk and load resources
+nltk.download('punkt')
 lemmatizer = WordNetLemmatizer()
 
 # Load model and data
@@ -33,7 +29,7 @@ def bow(sentence, words, show_details=True):
             if w == s:
                 bag[i] = 1
                 if show_details:
-                    logging.debug("found in bag: %s" % w)
+                    print("found in bag: %s" % w)
     return np.array(bag)
 
 def predict_class(sentence, model):
@@ -48,25 +44,19 @@ def predict_class(sentence, model):
     return return_list
 
 def getResponse(ints, intents_json):
-    if not ints:
-        return "I'm not sure how to respond. Could you please provide more information or contact a doctor?"
     tag = ints[0]['intent']
     list_of_intents = intents_json['intents']
     for i in list_of_intents:
         if i['tag'] == tag:
             responses = i['responses']
             result = "\n\n".join(responses)
-            return result
-    return "Sorry, I don't have information on that."
+            break
+    return result
 
 def chatbot_response(msg):
-    try:
-        ints = predict_class(msg, model)
-        res = getResponse(ints, intents)
-        return res  # Return as a plain string
-    except Exception as e:
-        logging.error(f"Error in chatbot_response: {e}")
-        return "An error occurred while processing your request. Please try again later."
+    ints = predict_class(msg, model)
+    res = getResponse(ints, intents)
+    return res
 
 app = Flask(__name__)
 app.static_folder = 'static'
@@ -78,13 +68,9 @@ def home():
 @app.route("/get")
 def get_bot_response():
     userText = request.args.get('msg')
-    if not userText:
-        logging.warning("No message provided")
-        return jsonify({"response": "No message provided"}), 400
-    
     response = chatbot_response(userText)
-    logging.info(f"User: {userText}, Response: {response}")
-    return jsonify({"response": response})  # Ensure response is a JSON object with a "response" key
+    print("Response to send:", response)  # Debugging line
+    return jsonify({'response': response})
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
