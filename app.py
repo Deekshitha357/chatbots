@@ -19,57 +19,80 @@ if not os.path.exists(nltk_data_path):
 
 nltk.data.path.append(nltk_data_path)
 
-try:
-    nltk.data.find('tokenizers/punkt')
-except LookupError:
-    logger.info("NLTK punkt resource not found, downloading...")
-    nltk.download('punkt', download_dir=nltk_data_path)
+required_nltk_resources = ['punkt', 'wordnet', 'omw-1.4']
+for resource in required_nltk_resources:
+    try:
+        nltk.data.find(f'tokenizers/{resource}')
+    except LookupError:
+        logger.info(f"NLTK {resource} resource not found, downloading...")
+        nltk.download(resource, download_dir=nltk_data_path)
 
 from nltk.stem import WordNetLemmatizer
 lemmatizer = WordNetLemmatizer()
 
 # Load model and data
-model = load_model('model.h5')
-intents = json.loads(open('data.json').read())
-words = pickle.load(open('texts.pkl', 'rb'))
-classes = pickle.load(open('labels.pkl', 'rb'))
+try:
+    model = load_model('model.h5')
+    intents = json.loads(open('data.json').read())
+    words = pickle.load(open('texts.pkl', 'rb'))
+    classes = pickle.load(open('labels.pkl', 'rb'))
+    logger.info("Model and data loaded successfully.")
+except Exception as e:
+    logger.error(f"Failed to load model or data: {e}")
+    raise
 
 def clean_up_sentence(sentence):
-    sentence_words = nltk.word_tokenize(sentence)
-    sentence_words = [lemmatizer.lemmatize(word.lower()) for word in sentence_words]
-    return sentence_words
+    try:
+        sentence_words = nltk.word_tokenize(sentence)
+        sentence_words = [lemmatizer.lemmatize(word.lower()) for word in sentence_words]
+        return sentence_words
+    except Exception as e:
+        logger.error(f"Error in clean_up_sentence: {e}")
+        raise
 
 def bow(sentence, words, show_details=True):
-    sentence_words = clean_up_sentence(sentence)
-    bag = [0] * len(words)
-    for s in sentence_words:
-        for i, w in enumerate(words):
-            if w == s:
-                bag[i] = 1
-                if show_details:
-                    logger.debug(f"Found in bag: {w}")
-    return np.array(bag)
+    try:
+        sentence_words = clean_up_sentence(sentence)
+        bag = [0] * len(words)
+        for s in sentence_words:
+            for i, w in enumerate(words):
+                if w == s:
+                    bag[i] = 1
+                    if show_details:
+                        logger.debug(f"Found in bag: {w}")
+        return np.array(bag)
+    except Exception as e:
+        logger.error(f"Error in bow function: {e}")
+        raise
 
 def predict_class(sentence, model):
-    p = bow(sentence, words, show_details=False)
-    res = model.predict(np.array([p]))[0]
-    ERROR_THRESHOLD = 0.25
-    results = [[i, r] for i, r in enumerate(res) if r > ERROR_THRESHOLD]
-    results.sort(key=lambda x: x[1], reverse=True)
-    return_list = []
-    for r in results:
-        return_list.append({"intent": classes[r[0]], "probability": str(r[1])})
-    return return_list
+    try:
+        p = bow(sentence, words, show_details=False)
+        res = model.predict(np.array([p]))[0]
+        ERROR_THRESHOLD = 0.25
+        results = [[i, r] for i, r in enumerate(res) if r > ERROR_THRESHOLD]
+        results.sort(key=lambda x: x[1], reverse=True)
+        return_list = []
+        for r in results:
+            return_list.append({"intent": classes[r[0]], "probability": str(r[1])})
+        return return_list
+    except Exception as e:
+        logger.error(f"Error in predict_class function: {e}")
+        raise
 
 def getResponse(ints, intents_json):
-    tag = ints[0]['intent']
-    list_of_intents = intents_json['intents']
-    for i in list_of_intents:
-        if i['tag'] == tag:
-            responses = i['responses']
-            result = "\n\n".join(responses)
-            break
-    return result
+    try:
+        tag = ints[0]['intent']
+        list_of_intents = intents_json['intents']
+        for i in list_of_intents:
+            if i['tag'] == tag:
+                responses = i['responses']
+                result = "\n\n".join(responses)
+                break
+        return result
+    except Exception as e:
+        logger.error(f"Error in getResponse function: {e}")
+        raise
 
 def chatbot_response(msg):
     try:
